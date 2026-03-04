@@ -147,7 +147,7 @@
             top: 10px;
             left: 15px;
             width: 270px;
-            height: 180px; /* Fixed height to create the "window" effect */
+            height: 180px; /* Fixed height creates the "window" */
             background-color: #fff;
             z-index: 3;
             padding: 20px;
@@ -155,18 +155,29 @@
             border-radius: 5px;
             transition: transform 0.8s ease 0.4s, z-index 0.1s 0.4s;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            overflow: hidden; /* Hides the text that is currently off-screen */
+            
+            /* --- SCROLLING ENABLED --- */
+            overflow-y: auto; /* Allows scrolling */
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
         }
 
-        /* --- SCROLLING ANIMATION STYLES --- */
-        .letter-content {
-            /* This container holds the text and will slide up */
-            transition: transform 2.5s ease-in-out;
-            transform: translateY(0); /* Start position */
+        /* Custom Scrollbar Styling */
+        .letter::-webkit-scrollbar {
+            width: 8px;
+        }
+        .letter::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+            border-radius: 4px;
+        }
+        .letter::-webkit-scrollbar-thumb {
+            background: var(--envelope-color); 
+            border-radius: 4px;
+        }
+        .letter::-webkit-scrollbar-thumb:hover {
+            background: var(--envelope-dark); 
         }
 
         .letter h2 {
@@ -204,12 +215,6 @@
             z-index: 7; /* Moves in front of everything */
         }
 
-        /* SCROLL THE TEXT UP */
-        .envelope-wrapper.open .letter-content {
-            /* Moves the text up so the bottom part is visible */
-            transform: translateY(-100px); 
-        }
-
         .instruction {
             margin-top: 30px;
             color: var(--text-color);
@@ -244,20 +249,17 @@
             <div class="heart"></div>
             
             <div class="letter">
-                <!-- Added wrapper class 'letter-content' here to animate the text -->
-                <div class="letter-content">
-                    <h2>Heyy Palangga...</h2>
-                    <p>
-                      I'm sooo soo Sorryyyy jud, hon :(
-                    </p>
-                    <p>
-                        I'm so sorry kaayo sa akong gipa-feel nimo tungod sa akong mga questions. Dili jud ko gusto nga ma-uncomfortable ka. Looooveee kaayo tika soo so muchy jud!! Im soo sorryy jud hon, klaro kaayo nga nalain ka sako gi ask nimo kanina, and ana pajud ko na dili sa to i talk.
-                    </p>
-                    <p>
-                        I'm soo soo sorryy judd, Babyyy :( 
-                    </p>
-                    <div class="signature">I love you always.</div>
-                </div>
+                <h2>Heyy Palangga...</h2>
+                <p>
+                  I'm sooo soo Sorryyyy jud, hon :(
+                </p>
+                <p>
+                    I'm so sorry kaayo sa akong gipa-feel nimo tungod sa akong mga questions. Dili jud ko gusto nga ma-uncomfortable ka. Looooveee kaayo tika soo so muchy jud!! Im soo sorryy jud hon, klaro kaayo nga nalain ka sako gi ask nimo kanina, and ana pajud ko na dili sa to i talk.
+                </p>
+                <p>
+                    I'm soo soo sorryy judd, Babyyy :( 
+                </p>
+                <div class="signature">I love you always.</div>
             </div>
         </div>
     </div>
