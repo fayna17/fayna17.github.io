@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@400;600&display=swap');
+
+        :root {
+            --bg-color: #f3e5d8; /* Light Brown */
+            --envelope-color: #d4a373;
+            --envelope-dark: #bc8a5f;
+            --heart-color: #ff6b6b;
+            --text-color: #5d4037;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-color);
+            font-family: 'Quicksand', sans-serif;
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        /* --- Floating Lily Stickers --- */
+        .sticker-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .lily {
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .lily:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .lily:nth-child(2) { top: 20%; right: 15%; animation-delay: 1s; font-size: 2rem; }
+        .lily:nth-child(3) { bottom: 15%; left: 20%; animation-delay: 2s; }
+        .lily:nth-child(4) { bottom: 10%; right: 10%; animation-delay: 3s; font-size: 2.5rem; }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        /* --- Envelope Container --- */
+        .envelope-wrapper {
+            position: relative;
+            cursor: pointer;
+            z-index: 10;
+            transition: transform 0.3s ease;
+        }
+
+        .envelope-wrapper:hover {
+            transform: scale(1.02);
+        }
+
+        .envelope {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background-color: var(--envelope-color);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            border-radius: 5px;
+        }
+
+        /* The Heart Sticker */
+        .heart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            background-color: var(--heart-color);
+            transform: translate(-50%, -50%) rotate(45deg);
+            z-index: 5;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .heart::before, .heart::after {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: var(--heart-color);
+            border-radius: 50%;
+        }
+        .heart::before { top: -15px; left: 0; }
+        .heart::after { top: 0; left: -15px; }
+
+        /* Envelope Flaps */
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 110px solid var(--envelope-dark);
+            transform-origin: top;
+            transition: transform 0.6s ease, z-index 0.2s;
+            z-index: 6;
+        }
+
+        .front {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-bottom: 100px solid var(--envelope-color);
+            z-index: 4;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 200px;
+            background-color: #e6ccb2;
+            z-index: 1;
+            border-radius: 5px;
+        }
+
+        /* The Letter */
+        .letter {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            width: 270px;
+            height: 180px;
+            background-color: #fff;
+            z-index: 3;
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            transition: transform 0.8s ease 0.4s, z-index 0.1s 0.4s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .letter h2 {
+            font-family: 'Dancing Script', cursive;
+            color: var(--text-color);
+            margin: 0 0 10px 0;
+            font-size: 1.8rem;
+        }
+
+        .letter p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .signature {
+            margin-top: 15px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.2rem;
+            color: var(--heart-color);
+        }
+
+        /* --- Animation States --- */
+        
+        /* Open Flap */
+        .envelope-wrapper.open .flap {
+            transform: rotateX(180deg);
+            z-index: 1; /* Moves behind the letter */
+        }
+
+        /* Slide Letter Up */
+        .envelope-wrapper.open .letter {
+            transform: translateY(-120px);
+            z-index: 7; /* Moves in front of everything */
+        }
+
+        .instruction {
+            margin-top: 30px;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            opacity: 0.7;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Cute Lily Stickers Background -->
+    <div class="sticker-container">
+        <div class="lily">🌸</div>
+        <div class="lily">🌷</div>
+        <div class="lily">🌼</div>
+        <div class="lily">🌺</div>
+    </div>
+
+    <div class="envelope-wrapper" onclick="toggleEnvelope()">
+        <div class="envelope">
+            <div class="back"></div>
+            <div class="front"></div>
+            <div class="flap"></div>
+            <div class="heart"></div>
+            
+            <div class="letter">
+                <h2>Heyy Palangga...</h2>
+                <p>
+                  I'm sooo soo Sorryyyy jud, hon :(
+                </p>
+                <p>
+                    I’m so sorry kaayo sa akong gipa-feel nimo tungod sa akong mga questions. Dili jud ko gusto nga ma-uncomfortable ka. Looooveee kaayo tika soo so muchy jud!! Im soo sorryy jud hon, klaro kaayo nga nalain ka sako gi ask nimo kanina, and ana pajud ko na dili sa to i talk.
+                </p>
+                <p>
+                    I'm soo soo sorryy judd, Babyyy :( 
+                </p>
+                <div class="signature">I love you always.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="instruction">Click the envelope to open</div>
+
+    <script>
+        function toggleEnvelope() {
+            const wrapper = document.querySelector('.envelope-wrapper');
+            wrapper.classList.toggle('open');
+            
+            const instruction = document.querySelector('.instruction');
+            if(wrapper.classList.contains('open')) {
+                instruction.style.display = 'none';
+            } else {
+                instruction.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
