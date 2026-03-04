@@ -147,7 +147,7 @@
             top: 10px;
             left: 15px;
             width: 270px;
-            height: 180px;
+            height: 180px; /* Fixed height to create the "window" effect */
             background-color: #fff;
             z-index: 3;
             padding: 20px;
@@ -155,11 +155,18 @@
             border-radius: 5px;
             transition: transform 0.8s ease 0.4s, z-index 0.1s 0.4s;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            overflow: hidden;
+            overflow: hidden; /* Hides the text that is currently off-screen */
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
+        }
+
+        /* --- SCROLLING ANIMATION STYLES --- */
+        .letter-content {
+            /* This container holds the text and will slide up */
+            transition: transform 2.5s ease-in-out;
+            transform: translateY(0); /* Start position */
         }
 
         .letter h2 {
@@ -173,7 +180,7 @@
             font-size: 0.9rem;
             color: #666;
             line-height: 1.4;
-            margin: 0;
+            margin: 0 0 10px 0;
         }
 
         .signature {
@@ -195,6 +202,12 @@
         .envelope-wrapper.open .letter {
             transform: translateY(-120px);
             z-index: 7; /* Moves in front of everything */
+        }
+
+        /* SCROLL THE TEXT UP */
+        .envelope-wrapper.open .letter-content {
+            /* Moves the text up so the bottom part is visible */
+            transform: translateY(-100px); 
         }
 
         .instruction {
@@ -231,17 +244,20 @@
             <div class="heart"></div>
             
             <div class="letter">
-                <h2>Heyy Palangga...</h2>
-                <p>
-                  I'm sooo soo Sorryyyy jud, hon :(
-                </p>
-                <p>
-                    I’m so sorry kaayo sa akong gipa-feel nimo tungod sa akong mga questions. Dili jud ko gusto nga ma-uncomfortable ka. Looooveee kaayo tika soo so muchy jud!! Im soo sorryy jud hon, klaro kaayo nga nalain ka sako gi ask nimo kanina, and ana pajud ko na dili sa to i talk.
-                </p>
-                <p>
-                    I'm soo soo sorryy judd, Babyyy :( 
-                </p>
-                <div class="signature">I love you always.</div>
+                <!-- Added wrapper class 'letter-content' here to animate the text -->
+                <div class="letter-content">
+                    <h2>Heyy Palangga...</h2>
+                    <p>
+                      I'm sooo soo Sorryyyy jud, hon :(
+                    </p>
+                    <p>
+                        I'm so sorry kaayo sa akong gipa-feel nimo tungod sa akong mga questions. Dili jud ko gusto nga ma-uncomfortable ka. Looooveee kaayo tika soo so muchy jud!! Im soo sorryy jud hon, klaro kaayo nga nalain ka sako gi ask nimo kanina, and ana pajud ko na dili sa to i talk.
+                    </p>
+                    <p>
+                        I'm soo soo sorryy judd, Babyyy :( 
+                    </p>
+                    <div class="signature">I love you always.</div>
+                </div>
             </div>
         </div>
     </div>
