@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Letter For You</title>
+    <!-- Importing Vintage Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            /* Dark wood table background */
+            background-color: #3e2723;
+            background-image: repeating-linear-gradient(45deg, #3e2723 25%, #4e342e 25%, #4e342e 50%, #3e2723 50%, #3e2723 75%, #4e342e 75%, #4e342e 100%);
+            background-size: 20px 20px;
+            font-family: 'Courier Prime', monospace;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* The Vintage Paper */
+        .paper {
+            background-color: #f4e4bc; /* Old paper color */
+            width: 90%;
+            max-width: 500px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            transform: rotate(-2deg); /* Slight tilt for realism */
+            border: 1px solid #d7c49e;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+        }
+
+        /* The Wax Seal */
+        .wax-seal {
+            position: absolute;
+            top: -20px;
+            right: 40px;
+            width: 60px;
+            height: 60px;
+            background: #b71c1c; /* Deep red */
+            border-radius: 50%;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.4), inset 2px 2px 5px rgba(255,255,255,0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffccbc;
+            font-size: 30px;
+            font-family: 'Great Vibes', cursive;
+            border: 2px dashed #8e0000;
+            z-index: 2;
+        }
+
+        /* The Stamp */
+        .stamp {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            border: 3px double #b71c1c;
+            color: #b71c1c;
+            padding: 5px 10px;
+            font-weight: bold;
+            font-size: 14px;
+            transform: rotate(15deg);
+            opacity: 0.8;
+            letter-spacing: 2px;
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            color: #5d4037;
+            font-size: 3rem;
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid #5d4037;
+            padding-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #3e2723;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .highlight {
+            color: #d81b60; /* Vintage Pink */
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .signature {
+            margin-top: 40px;
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: #5d4037;
+            text-align: right;
+        }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: absolute;
+            bottom: -50px;
+            color: #d81b60;
+            font-size: 20px;
+            animation: floatUp 8s linear infinite;
+            opacity: 0.6;
+            z-index: 1;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="paper">
+        <div class="wax-seal">❤</div>
+        <div class="stamp">LOVE</div>
+
+        <h1>Heyyyy Babyyy,</h1>
+        
+        <p>
+            Baby, sorry kaayo sa akong mga nasulti earlier. Nadala lang gyud ko sa akong emotions and naka-sulti kog mga words nga dili sakto. 
+        </p>
+        
+        <p>
+            Sorry pud nga gi-accuse tika nga naa kay kabet, unfair kaayo to nimo. Dili gyud to mao akong gusto mahitabo.
+        </p>
+
+        <p>
+            LOOVEE KAAYO TIKAA, BABYY KAAYOO JUD NA <span class="highlight">KAAYOO</span>,
+        </p>
+
+        <div class="signature">
+            Lovee,<br>
+            -imongg asawaa
+        </div>
+    </div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '💖'; 
+            
+            // Randomize position and size
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+            
+            // Randomize animation duration
+            heart.style.animationDuration = Math.random() * 4 + 5 + 's';
+
+            document.body.appendChild(heart);
+
+            // Remove the heart after animation finishes
+            setTimeout(() => {
+                heart.remove();
+            }, 9000);
+        }
+
+        // Create a new heart every 400 milliseconds
+        setInterval(createHeart, 400);
+    </script>
+
+</body>
+</html >
